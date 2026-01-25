@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamal Raj Vendi | Projects</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/interactive.js" defer></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div><strong>Kamal Raj Vendi</strong></div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="skills.html">Skills</a>
+            <a href="projects.html">Projects</a>
+            <a href="certifications.html">Certifications</a>
+            <a href="contact.html">Contact</a>
+            <a href="assets/KAMAL-RAJ-VENDI-CV.pdf" download class="btn">Download CV</a>
+        </div>
+    </nav>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">🚀 Projects</h2>
+            <p>Explore a collection of Data Science and AI projects, with detailed information available for each project on click!</p>
+            <p> </p>
+            <p> </p>
+            
+            <!-- Filter Buttons -->
+            <div class="filter-btns">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+                <button class="filter-btn" data-filter="finance">Finance</button>
+                <button class="filter-btn" data-filter="deep-learning">Deep Learning</button>
+                <button class="filter-btn" data-filter="tableau">Tableau</button>
+                <button class="filter-btn" data-filter="capstone">Capstone</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="project-grid">
+
+                <!-- Healthcare Projects -->
+                <div class="project-card" data-category="healthcare">
+                    <img src="assets/Project/heart.jpg" alt="Heart Disease Prediction">
+                    <h3>Heart Disease Prediction</h3>
+                    <p>Predicting heart disease using ML models on patient health indicators.</p>
+                    <div class="tags"><span class="tag">ML</span><span class="tag">Healthcare</span></div>
+                </div>
+
+                <div class="project-card" data-category="healthcare">
+                    <img src="assets/Project/parkinsons.jpg" alt="Parkinson's Disease Detection">
+                    <h3>Parkinson's Disease Detection</h3>
+                    <p>Early diagnosis using MRI data and ML algorithms.</p>
+                    <div class="tags"><span class="tag">Deep Learning</span><span class="tag">Medical</span></div>
+                </div>
+
+                <div class="project-card" data-category="healthcare">
+                    <img src="assets/Project/vaccine.jpg" alt="H1N1 Vaccination Prediction">
+                    <h3>H1N1 Vaccination Prediction</h3>
+                    <p>Predicting vaccination behavior using logistic regression and survey data.</p>
+                    <div class="tags"><span class="tag">Logistic Regression</span><span class="tag">Healthcare</span></div>
+                </div>
+
+                <!-- Finance Projects -->
+                <div class="project-card" data-category="finance">
+                    <img src="assets/Project/taxi.jpg" alt="NYC Taxi Fare Prediction">
+                    <h3>NYC Taxi Fare Prediction</h3>
+                    <p>Predicting taxi fares using regression algorithms and historical data.</p>
+                    <div class="tags"><span class="tag">Regression</span><span class="tag">Finance</span></div>
+                </div>
+
+                <div class="project-card" data-category="finance">
+                    <img src="assets/Project/stock.jpg" alt="Stock Market Prediction">
+                    <h3>Stock Market Prediction</h3>
+                    <p>LSTM-based model for predicting stock prices from historical data.</p>
+                    <div class="tags"><span class="tag">Time Series</span><span class="tag">Finance</span></div>
+                </div>
+
+                <!-- Deep Learning Projects -->
+                <div class="project-card" data-category="deep-learning">
+                    <img src="assets/Project/digit.jpg" alt="Handwritten Digit Recognition">
+                    <h3>Handwritten Digit Recognition</h3>
+                    <p>CNN model recognizing handwritten digits with high accuracy.</p>
+                    <div class="tags"><span class="tag">CNN</span><span class="tag">Deep Learning</span></div>
+                </div>
+                
+                <!-- Capstone -->
+                <div class="project-card" data-category="capstone">
+                    <img src="assets/Project/space.jpg" alt="IBM SpaceX Capstone">
+                    <h3>IBM SpaceX Capstone</h3>
+                    <p>Comprehensive ML pipeline analyzing Falcon 9 landing success, EDA, geospatial analysis, and interactive dashboards.</p>
+                    <div class="tags"><span class="tag">Capstone</span><span class="tag">ML</span><span class="tag">EDA</span></div>
+                </div>
+
+                <!-- Tableau Visualizations - Click to Preview -->
+                <div class="project-card tableau-card" data-category="tableau" data-viz-id="netflix">
+                    <div class="tableau-thumbnail">
+                        <img src="https://public.tableau.com/static/images/Bo/Book1_17410742767460/Dashboard1/1_rss.png" alt="Netflix Analytics Dashboard" />
+                        <div class="tableau-overlay">
+                            <span class="preview-icon">📊</span>
+                            <span class="preview-text">Click to Preview</span>
+                        </div>
+                    </div>
+                    <h3>Netflix Analytics Dashboard</h3>
+                    <p>Comprehensive analysis of Netflix content, ratings, and trends.</p>
+                    <div class="tags">
+                        <span class="tag">Netflix</span>
+                        <span class="tag">Analytics</span>
+                        <span class="tag">Tableau</span>
+                    </div>
+                </div>
+
+                <div class="project-card tableau-card" data-category="tableau" data-viz-id="business">
+                    <div class="tableau-thumbnail">
+                        <img src="https://public.tableau.com/static/images/Bo/Book5_17411595338000/Dashboard1/1_rss.png" alt="Business Dashboard" />
+                        <div class="tableau-overlay">
+                            <span class="preview-icon">📈</span>
+                            <span class="preview-text">Click to Preview</span>
+                        </div>
+                    </div>
+                    <h3>Business Intelligence Dashboard</h3>
+                    <p>Interactive business intelligence dashboard for KPI tracking and analysis.</p>
+                    <div class="tags">
+                        <span class="tag">Business</span>
+                        <span class="tag">BI</span>
+                        <span class="tag">Tableau</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Tableau Modal -->
+    <div class="tableau-modal" id="tableauModal">
+        <div class="tableau-modal-content">
+            <button class="tableau-modal-close" id="tableauModalClose">&times;</button>
+            <div class="tableau-modal-header">
+                <h3 id="tableauModalTitle">Dashboard</h3>
+            </div>
+            <div class="tableau-modal-body">
+                <div class="tableauPlaceholder" id="tableauVizContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://linkedin.com/in/kamal-raj" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/cool0009" target="_blank" rel="noopener" class="social-link" title="GitHub">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="mailto:kamalrajvendi9154@gmail.com" class="social-link" title="Email">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                    </svg>
+                </a>
+                <a href="https://twitter.com" target="_blank" rel="noopener" class="social-link" title="Twitter">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
+            <p>© 2026 Kamal Raj Vendi | Data Science & AI Portfolio</p>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        // Tableau visualization configurations
+        var tableauConfigs = {
+            'netflix': {
+                title: 'Netflix Analytics Dashboard',
+                name: 'Book1_17410742767460/Dashboard1',
+                hostUrl: 'https://public.tableau.com/views/Book1_17410742767460/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link',
+                tabs: 'yes',
+                toolbar: 'yes'
+            },
+            'business': {
+                title: 'Business Intelligence Dashboard',
+                name: 'Book5_17411595338000/Dashboard1',
+                hostUrl: 'https://public.tableau.com/views/Book5_17411595338000/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link/',
+                tabs: 'yes',
+                toolbar: 'yes'
+            }
+        };
+
+        // Modal elements
+        var modal = document.getElementById('tableauModal');
+        var modalClose = document.getElementById('tableauModalClose');
+        var modalTitle = document.getElementById('tableauModalTitle');
+        var vizContainer = document.getElementById('tableauVizContainer');
+
+        // Open modal on card click
+        document.querySelectorAll('.tableau-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                var vizId = this.getAttribute('data-viz-id');
+                var config = tableauConfigs[vizId];
+                
+                if (config) {
+                    modalTitle.textContent = config.title;
+                    vizContainer.innerHTML = '<object class="tableauViz" style="width: 100%; height: 600px;">' +
+                        '<param name="host_url" value="' + config.hostUrl + '" />' +
+                        '<param name="embed_code_version" value="3" />' +
+                        '<param name="site_root" value="" />' +
+                        '<param name="name" value="' + config.name + '" />' +
+                        '<param name="tabs" value="' + config.tabs + '" />' +
+                        '<param name="toolbar" value="' + config.toolbar + '" />' +
+                        '<param name="language" value="en-US" />' +
+                        '</object>';
+                    
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Load Tableau script
+                    var script = document.createElement('script');
+                    script.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizContainer.appendChild(script);
+                }
+            });
+        });
+
+        // Close modal
+        modalClose.addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            vizContainer.innerHTML = '';
+        });
+
+        // Close on backdrop click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                vizContainer.innerHTML = '';
+            }
+        });
+
+        // Close on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                vizContainer.innerHTML = '';
+            }
+        });
+    </script>
+
+</body>
+</html>
+
