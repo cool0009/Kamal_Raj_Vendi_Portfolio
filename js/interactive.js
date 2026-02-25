@@ -236,7 +236,7 @@ function initProjectModals() {
             title: 'NYC Taxi Fare Prediction',
             description: 'Regression model to predict NYC taxi fares using trip data. Includes feature engineering, data cleaning, and visualization of fare distribution and trends.',
             technologies: ['Python', 'Scikit-learn', 'Pandas', 'Matplotlib'],
-            link: 'https://github.com/cool0009/NYC-Taxi-Fare-Prediction'
+            link: 'https://cool0009.github.io/New-York-taxi-fare-prediction/'
         },
         finance: {
             title: 'Stock Market Prediction',
