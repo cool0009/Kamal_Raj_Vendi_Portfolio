@@ -204,72 +204,14 @@ h2.section-title::before {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     padding: 20px;
-    margin-bottom: 10px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-bottom: 20px;
     display: block;
     position: relative;
     overflow: hidden;
     text-align: left;
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, #00d9ff, #00ff88);
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-}
-
-.card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-    border-color: rgba(0, 217, 255, 0.3);
-}
-
-.card:hover::before {
-    transform: scaleX(1);
-}
-
-/* ==========================================
-   SKILL BARS
-   ========================================== */
-.skill-bar-container {
-    width: 100%;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    margin-top: 15px;
-    overflow: hidden;
-}
-
-.skill-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #00d9ff, #00ff88);
-    border-radius: 4px;
-    width: var(--width);
-    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-}
-
-.skill-bar::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    background: linear-gradient(135deg, #00d9ff, #00ff88);
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
-}
-
-.skill-content {
-    transition: all 0.3s ease;
+    transition: transform 0.1s ease-out, box-shadow 0.3s, border-color 0.3s; /* Re-add transition for tilt */
+    transform-style: preserve-3d; /* Enable 3D transforms */
+    perspective: 1000px; /* Enable 3D transforms */
 }
 
 /* ==========================================
@@ -334,64 +276,56 @@ h2.section-title::before {
 }
 
 .project-card {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 25px;
+    background: transparent !important;
     border-radius: 18px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: flex;
-    flex-direction: column;
+    perspective: 1000px;
+    height: 450px;
     cursor: pointer;
-}
-
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #00d9ff, #00ff88);
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
+    transition: transform 0.3s ease;
 }
 
 .project-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-5px);
 }
 
-.project-card:hover::before {
-    transform: scaleX(1);
-}
-
-.project-card img {
+.project-card-inner {
+    position: relative;
     width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    transition: transform 0.4s ease;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
 }
 
-.project-card:hover img {
-    transform: scale(1.05);
+.project-card.flipped .project-card-inner {
+    transform: rotateY(180deg);
 }
 
-.project-card h3 {
-    font-size: 1.3rem;
-    background: linear-gradient(135deg, #fff, #00d9ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.project-card-front, .project-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 18px;
+    padding: 25px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
-.project-card p {
-    color: #bbb;
-    font-size: 0.95rem;
-    line-height: 1.6;
+.project-card-front {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-card-back {
+    background: rgba(10, 10, 25, 0.98);
+    border: 2px solid #00d9ff;
+    transform: rotateY(180deg);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
 }
 
 /* ==========================================
@@ -471,7 +405,7 @@ h2.section-title::before {
 }
 
 .cert-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.05); /* Restore background */
     padding: 30px 20px;
     border-radius: 18px;
     text-align: center;
@@ -526,11 +460,16 @@ h2.section-title::before {
    TIMELINE (Experience Section)
    ========================================== */
 .timeline-content {
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.03); /* Restore background */
+    padding: 15px; /* Restore padding */
+    border-radius: 10px; /* Restore border-radius */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Restore border */
+    transition: all 0.3s ease; /* Restore transition */
 }
 
-.expanded .timeline-content {
-    transform: scale(1.02);
+.timeline-content:hover {
+    background: rgba(255, 255, 255, 0.06); /* Restore hover background */
+    transform: translateX(5px); /* Restore hover transform */
 }
 
 /* ==========================================
@@ -779,24 +718,31 @@ footer p {
    ABOUT PAGE STYLES
    ========================================== */
 .about-grid {
-    display: flex;
-    flex-direction: column;
+    display: grid; /* Restore grid layout */
+    grid-template-columns: 200px 1fr; /* Restore grid columns */
     gap: 10px;
 }
 
 .about-card {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    padding: 20px;
-    align-items: flex-start;
+    display: grid; /* Restore grid display */
+    grid-template-columns: 200px 1fr; /* Restore grid columns */
+    gap: 20px; /* Restore gap */
+    background: rgba(255, 255, 255, 0.05); /* Restore background */
+    border-radius: 15px; /* Restore border-radius */
+    padding: 20px; /* Restore padding */
+    align-items: flex-start; /* Restore alignment */
+    text-align: left; /* Restore text alignment */
+}
+
+@media (max-width: 992px) {
+    .about-card {
+        grid-template-columns: 1fr;
+    }
 }
 
 .about-image {
-    display: flex;
-    justify-content: flex-start;
+    display: flex; /* Restore flex display */
+    justify-content: flex-start; /* Restore justify-content */
 }
 
 .profile-image {
@@ -838,22 +784,22 @@ footer p {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 10px;
-    text-align: left;
+    text-align: left; /* Restore text alignment */
 }
 
 .tagline {
     color: #00ff88;
     font-size: 1.1rem;
     margin-bottom: 20px;
-    font-weight: 500;
-    text-align: left;
+    font-weight: 500; /* Restore font-weight */
+    text-align: left; /* Restore text alignment */
 }
 
 .about-content p {
     color: #ccc;
     margin-bottom: 15px;
     line-height: 1.8;
-    text-align: left;
+    text-align: left; /* Restore text alignment */
 }
 
 .about-stats {
@@ -862,11 +808,11 @@ footer p {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    justify-content: flex-start;
+    justify-content: flex-start; /* Restore justify-content */
 }
 
 .about-stats .stat {
-    text-align: left;
+    text-align: left; /* Restore text alignment */
 }
 
 .about-stats .stat-num {
@@ -887,11 +833,11 @@ footer p {
 }
 
 /* Timeline Styles */
-.timeline-card {
+.timeline-card { /* Restore card styling */
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     padding: 20px;
-}
+} 
 
 .timeline-card h3 {
     text-align: left;
@@ -943,16 +889,10 @@ footer p {
 }
 
 .timeline-content {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-}
-
-.timeline-content:hover {
-    background: rgba(255, 255, 255, 0.06);
-    transform: translateX(5px);
+    background: transparent;
+    padding: 15px 0;
+    border: none;
+    transition: none;
 }
 
 .timeline-content h4 {
@@ -973,11 +913,11 @@ footer p {
 }
 
 /* Interests Grid */
-.interests-card {
+.interests-card { /* Restore card styling */
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     padding: 20px;
-}
+} 
 
 .interests-grid {
     display: flex;
@@ -1325,11 +1265,11 @@ footer p {
    EDUCATION SECTION
    ========================================== */
 .education-card {
+.education-card { /* Restore card styling */
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     padding: 20px;
-}
-
+} 
 .education-card h3 {
     text-align: left;
 }
@@ -1343,17 +1283,11 @@ footer p {
 .education-item {
     display: flex;
     gap: 20px;
-    padding: 25px;
-    background: rgba(0, 217, 255, 0.08);
-    border-radius: 15px;
-    border: 1px solid rgba(0, 217, 255, 0.2);
-    transition: all 0.3s ease;
-}
-
-.education-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    border-color: rgba(0, 217, 255, 0.4);
+    padding: 25px; /* Restore padding */
+    background: rgba(0, 217, 255, 0.08); /* Restore background */
+    border-radius: 15px; /* Restore border-radius */
+    border: 1px solid rgba(0, 217, 255, 0.2); /* Restore border */
+    transition: all 0.3s ease; /* Restore transition */
 }
 
 .edu-icon {
@@ -1392,6 +1326,11 @@ footer p {
     line-height: 1.5;
 }
 
+.education-item:hover { /* Restore hover effects */
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(0, 217, 255, 0.4);
+}
 @media (max-width: 600px) {
     .education-item {
         flex-direction: row;
@@ -1714,4 +1653,3 @@ footer p {
         font-size: 1.2rem;
     }
 }
-

@@ -131,38 +131,19 @@ function initSkillBars() {
 // 4. Counter Animation for Stats
 // ==========================================
 function initCounterAnimation() {
-    // Add stats section if not exists
-    const aboutSection = document.querySelector('#about .container');
-    if (aboutSection && !document.querySelector('.stats-container')) {
-        const statsHTML = `
-            <div class="stats-container fade-in">
-                <div class="stat-item" data-count="14">
-                    <span class="stat-number">0</span>
-                    <span class="stat-label">Certifications</span>
-                </div>
-                <div class="stat-item" data-count="4">
-                    <span class="stat-number">0</span>
-                    <span class="stat-label">Projects</span>
-                </div>
-                <div class="stat-item" data-count="2">
-                    <span class="stat-number">0</span>
-                    <span class="stat-label">Internships</span>
-                </div>
-                <div class="stat-item" data-count="2024">
-                    <span class="stat-number">0</span>
-                    <span class="stat-label">Graduation Year</span>
-                </div>
-            </div>
-        `;
-        aboutSection.insertAdjacentHTML('beforeend', statsHTML);
+    const statsSection = document.querySelector('.about-stats');
+    if (statsSection) {
+        const stats = statsSection.querySelectorAll('.stat');
         
         // Animate counters
         const statObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.stat-item').forEach(stat => {
-                        const target = parseInt(stat.dataset.count);
-                        const numberEl = stat.querySelector('.stat-number');
+                    stats.forEach(stat => {
+                        const numberEl = stat.querySelector('.stat-num');
+                        const target = parseInt(numberEl.textContent);
+                        if (isNaN(target)) return;
+                        
                         let current = 0;
                         const increment = target / 50;
                         const duration = 2000;
@@ -183,8 +164,7 @@ function initCounterAnimation() {
             });
         }, { threshold: 0.5 });
         
-        const statsContainer = document.querySelector('.stats-container');
-        if (statsContainer) statObserver.observe(statsContainer);
+        statObserver.observe(statsSection);
     }
 }
 
@@ -193,25 +173,6 @@ function initCounterAnimation() {
 // ==========================================
 function initProjectModals() {
     const projectCards = document.querySelectorAll('.project-card');
-    
-    // Create modal if not exists
-    if (!document.querySelector('.modal-overlay') && projectCards.length > 0) {
-        const modalHTML = `
-            <div class="modal-overlay">
-                <div class="modal-content">
-                    <button class="modal-close">&times;</button>
-                    <div class="modal-body"></div>
-                </div>
-            </div>
-        `;
-        document.body.insertAdjacentHTML('beforeend', modalHTML);
-    }
-    
-    const modal = document.querySelector('.modal-overlay');
-    if (!modal) return;
-    
-    const modalBody = modal.querySelector('.modal-body');
-    const closeBtn = modal.querySelector('.modal-close');
     
     const projectDetails = {
         healthcare: {
@@ -259,50 +220,35 @@ function initProjectModals() {
     };
     
     projectCards.forEach(card => {
-        card.style.cursor = 'pointer';
-        card.addEventListener('click', () => {
-            const category = card.dataset.category;
-            const details = projectDetails[category];
-            
-            if (!details) return;
-            
-            const img = card.querySelector('img');
-            const imgSrc = img ? img.src : '';
-            
-            modalBody.innerHTML = `
-                <h2>${details.title}</h2>
-                ${imgSrc ? `<img src="${imgSrc}" alt="${details.title}" style="width:100%; border-radius:10px; margin:15px 0;">` : ''}
-                <p>${details.description}</p>
-                <h4 style="margin-top:15px;">Technologies Used:</h4>
-                <div class="tags" style="margin-top:10px;">
-                    ${details.technologies.map(tech => `<span class="tag">${tech}</span>`).join('')}
+        const category = card.dataset.category;
+        const details = projectDetails[category];
+        if (!details) return;
+
+        // Save current front content
+        const frontContent = card.innerHTML;
+        
+        // Structure the flip card
+        card.innerHTML = `
+            <div class="project-card-inner">
+                <div class="project-card-front">
+                    ${frontContent}
                 </div>
-                <a href="${details.link}" target="_blank" class="btn" style="margin-top:20px;">View on GitHub</a>
-            `;
-            
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+                <div class="project-card-back">
+                    <h3 style="margin-bottom:15px; font-size: 1.4rem; color: #00d9ff; background: none; -webkit-text-fill-color: initial;">${details.title}</h3>
+                    <p style="color: #ccc; font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px;">${details.description}</p>
+                    <div class="tags" style="justify-content: center; margin-bottom: 20px;">
+                        ${details.technologies.map(tech => `<span class="tag" style="font-size: 0.75rem;">${tech}</span>`).join('')}
+                    </div>
+                    <a href="${details.link}" target="_blank" class="btn" style="font-size: 0.85rem; padding: 10px 22px;">View GitHub</a>
+                </div>
+            </div>
+        `;
+
+        card.addEventListener('click', (e) => {
+            // Don't flip if clicking the GitHub button
+            if (e.target.closest('.btn')) return;
+            card.classList.toggle('flipped');
         });
-    });
-    
-    closeBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    });
-    
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
-    
-    // ESC key to close
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
     });
 }
 
@@ -360,17 +306,27 @@ function initHoverEffects() {
     
     // Glow effect on cards
     const cards = document.querySelectorAll('.card, .project-card, .cert-card');
+    
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
+            // Apply a subtle radial gradient for glow effect
             card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0,217,255,0.1), rgba(255,255,255,0.05))`;
+            
+            // 3D Tilt Effect
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (centerY - y) / 15; // Adjust sensitivity
+            const rotateY = (x - centerX) / 15; // Adjust sensitivity
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         });
         
         card.addEventListener('mouseleave', () => {
-            card.style.background = '';
+            card.style.background = ''; // Reset background
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`; // Reset transform
         });
     });
 }
@@ -386,7 +342,7 @@ function initTimelineExpander() {
         card.style.position = 'relative';
         card.style.paddingLeft = '40px';
         
-        // Create timeline dot
+        // Create timeline dot (ensure this is consistent with CSS styling)
         const dot = document.createElement('div');
         dot.style.cssText = `
             position: absolute;
@@ -395,9 +351,9 @@ function initTimelineExpander() {
             width: 16px;
             height: 16px;
             background: linear-gradient(135deg, #00d9ff, #00ff88);
-            border-radius: 50%;
-            border: 3px solid #1a1a2e;
-            z-index: 1;
+            border-radius: 50%; /* Consistent with .timeline-dot in CSS */
+            border: 4px solid #1a1a2e; /* Consistent with .timeline-dot in CSS */
+            z-index: 1; /* Ensure it's above the line */
         `;
         card.insertBefore(dot, card.firstChild);
         
@@ -409,7 +365,7 @@ function initTimelineExpander() {
                 left: 16px;
                 top: 46px;
                 width: 2px;
-                height: calc(100% - 30px);
+                height: calc(100% - 30px); /* Adjust height to connect dots */
                 background: linear-gradient(180deg, #00d9ff, transparent);
             `;
             card.appendChild(line);
@@ -558,7 +514,7 @@ function initContactForm() {
     document.body.insertBefore(loader, document.body.firstChild);
     
     // Hide loader and show content when page is fully loaded
-    window.addEventListener('load', () => {
+    const hideLoader = () => {
         // Make body visible
         document.body.style.opacity = '1';
         
@@ -570,6 +526,11 @@ function initContactForm() {
             loader.remove();
             document.body.classList.add('loaded');
         }, 500);
-    });
-})();
+    };
 
+    if (document.readyState === 'complete') {
+        hideLoader();
+    } else {
+        window.addEventListener('load', hideLoader);
+    }
+})();
